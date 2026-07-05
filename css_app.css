@@ -153,6 +153,8 @@ header a {
     color: #fff;
     font-weight: bold;
     font-size: large;
+    transition: .5s;
+    z-index: 100;
 }
 
 .arrows button:hover {
@@ -199,4 +201,45 @@ header a {
     animation-delay: 1.8s;
 }
 
+.carousel.next .List .item:nth-child() img {
+    width: 150px;
+    height: 220px;
+    position: absolute;
+    left: 50%;
+    bottom: 50px;
+    border-radius: 20px;
+    animation: ShowImage 0.5s linear 1 forwards;
+}
 
+@keyframes ShowImage {
+    to{
+        width: 100%;
+        height: 100%;
+        left: 0;
+        bottom: 0;
+        border-radius: 0;
+    }
+}
+
+.carousel.next .thumnail .item:nth-child(1) {
+    width: 0;
+    overflow: hidden;
+    animation: showThumbnail .5s linear 1 forwards;
+}
+
+@keyframes showThumbnail {
+    to{
+        width: 150px;
+    }
+}
+
+.carousel.next .thumnail {
+    transform: translateX(150px);
+    animation: transFormThumbnail .5s linear 1 forwards;
+}
+
+@keyframes transFormThumbnail {
+    to{
+        transform: translateX(0);
+    }
+}
