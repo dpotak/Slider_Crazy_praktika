@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 body {
     font-family: Poppins;
@@ -28,6 +28,8 @@ header a {
     margin-right: 40px;
 }
 
+/* ===== CAROUSEL ===== */
+
 .carousel {
     width: 100vw;
     height: 100vh;
@@ -36,16 +38,27 @@ header a {
     position: relative;
 }
 
+/* ВСЕ СЛАЙДЫ */
 .carousel .List .item {
     position: absolute;
-    inset: 0 0 0 0;
+    inset: 0;
+    opacity: 0;
+    transition: 0.6s ease;
 }
+
+/* ТОЛЬКО ПЕРВЫЙ ВИЗУАЛЬНО АКТИВЕН */
+.carousel .List .item:first-child {
+    opacity: 1;
+}
+
+/* IMAGE */
 .carousel .List .item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+/* CONTENT */
 .carousel .List .item .content {
     position: absolute;
     top: 20%;
@@ -59,25 +72,26 @@ header a {
     text-shadow: 0 5px 10px #0004;
 }
 
+/* TEXT */
 .carousel .List .item .author {
     font-weight: bold;
     letter-spacing: 10px;
 }
 
-.carousel .List .item .content .title ,
+.carousel .List .item .content .title,
 .carousel .List .item .content .topic {
     font-weight: bold;
     font-size: 5em;
-    list-style: 1.3em;
 }
 
 .carousel .List .item .content .topic {
     color: #f1683a;
 }
 
+/* BUTTONS */
 .carousel .List .item .content .buttons {
     display: grid;
-    grid-template-columns: repeat(2 , 130px);
+    grid-template-columns: repeat(2, 130px);
     grid-template-rows: 40px;
     gap: 5px;
     margin-top: 20px;
@@ -97,10 +111,13 @@ header a {
     border: 1px solid #eee;
 }
 
+/* ===== THUMBNAIL ===== */
+
 .thumnail {
     position: absolute;
     bottom: 50px;
     left: 50%;
+    transform: translateX(-50%);
     width: max-content;
     z-index: 100;
     display: flex;
@@ -126,16 +143,15 @@ header a {
     bottom: 10px;
     left: 10px;
     right: 10px;
-}
-
-.thumnail .item .content {
     font-weight: bold;
 }
+
+/* ===== ARROWS ===== */
 
 .arrows {
     position: absolute;
     top: 80%;
-    right: 52%;
+    right: 60%;
     width: 300px;
     max-width: 30%;
     display: flex;
@@ -153,8 +169,9 @@ header a {
     color: #fff;
     font-weight: bold;
     font-size: large;
-    transition: .5s;
+    transition: .3s;
     z-index: 100;
+    cursor: pointer;
 }
 
 .arrows button:hover {
@@ -162,130 +179,30 @@ header a {
     color: #555;
 }
 
-.carousel .List .item:nth-child(1) {
-    z-index: 1;
-}
+/* ===== SIMPLE ACTIVE EFFECT ===== */
 
-.carousel .List .item:nth-child(1) .author ,
-.carousel .List .item:nth-child(1) .title ,
-.carousel .List .item:nth-child(1) .topic ,
-.carousel .List .item:nth-child(1) .des ,
-.carousel .List .item:nth-child(1) .buttons {
-    transform: translateY(50px);
-    filter: blur(20px);
-    opacity: 0;
-    animation: showContent 0.5s 1s linear 1 forwards;
+.carousel .List .item:first-child .author,
+.carousel .List .item:first-child .title,
+.carousel .List .item:first-child .topic,
+.carousel .List .item:first-child .des,
+.carousel .List .item:first-child .buttons {
+    animation: showContent 0.6s ease forwards;
 }
 
 @keyframes showContent {
-    to{
-        opacity: 1;
-        filter: blur(0);
-        transform: translateY(0);
-    }
-}
-
-.carousel .List .item:nth-child(1) .title {
-    animation-delay: 1.2s;
-}
-
-.carousel .List .item:nth-child(1) .topic {
-    animation-delay: 1.4s;
-}
-
-.carousel .List .item:nth-child(1) .des {
-    animation-delay: 1.6s;
-}
-
-.carousel .List .item:nth-child(1) .buttons {
-    animation-delay: 1.8s;
-}
-
-.carousel.next .List .item:nth-child() img {
-    width: 150px;
-    height: 220px;
-    position: absolute;
-    left: 50%;
-    bottom: 50px;
-    border-radius: 20px;
-    animation: ShowImage 0.5s linear 1 forwards;
-}
-
-@keyframes ShowImage {
-    to{
-        width: 100%;
-        height: 100%;
-        left: 0;
-        bottom: 0;
-        border-radius: 0;
-    }
-}
-
-.carousel.next .thumnail .item:nth-child(1) {
-    width: 0;
-    overflow: hidden;
-    animation: showThumbnail .5s linear 1 forwards;
-}
-
-@keyframes showThumbnail {
-    to{
-        width: 150px;
-    }
-}
-
-.carousel.next .thumnail {
-    transform: translateX(150px);
-    animation: transFormThumbnail .5s linear 1 forwards;
-}
-
-@keyframes transFormThumbnail {
-    to{
-        transform: translateX(0);
-    }
-}
-
-.carousel.prev .List .item:nth-child(2) {
-    z-index: 2;
-}
-
-.carousel.prev .List .item:nth-child(2) img {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    animation: outImage 0.5s linear 1 forwards;
-}
-
-@keyframes outImage {
-    to{
-        width: 150px;
-        height: 220px;
-        border-radius: 20px;
-        left: 50%;
-        bottom: 50px;
-    }
-}
-
-.carousel.prev .thumnail .item:nth-child(2) .author ,
-.carousel.prev .thumnail .item:nth-child(2) .title ,
-.carousel.prev .thumnail .item:nth-child(2) .topic ,
-.carousel.prev .thumnail .item:nth-child(2) .des ,
-.carousel.prev .thumnail .item:nth-child(2) .buttons {
-    animation: contentOut 1.5s linear 1 forwards;
-}
-
-
-@keyframes contentOut {
-    to{
-        transform: translateY(150px);
-        filter: blur(20px);
+    from {
         opacity: 0;
+        transform: translateY(40px);
+        filter: blur(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
     }
 }
 
-.carousel.next .arrows button,
-.carousel.prev .arrows button {
-    pointer-events: none;
-}
+/* ===== TIME BAR ===== */
 
 .time {
     width: 0%;
@@ -297,22 +214,25 @@ header a {
     left: 0;
 }
 
-.carousel.next .time ,
+.carousel.next .time,
 .carousel.prev .time {
     width: 100%;
-    animation: timeRunning 2s linear 1 forwards;
+    animation: timeRunning 2s linear forwards;
 }
 
 @keyframes timeRunning {
-    to{
+    to {
         width: 0;
-    }   
+    }
 }
+
+/* ===== MOBILE ===== */
 
 @media screen and (max-width: 678px) {
     .carousel .List .item .content {
         padding-right: 0;
     }
+
     .carousel .List .item .content .title {
         font-size: 30px;
     }
